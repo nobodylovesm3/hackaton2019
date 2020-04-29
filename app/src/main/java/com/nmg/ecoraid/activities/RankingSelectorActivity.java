@@ -4,27 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.nmg.ecoraid.R;
 
-public class MainActivity extends AppCompatActivity {
+public class RankingSelectorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.selector_ranking_layout);
+        ImageView imageView = findViewById(R.id.image_view);
         setFullScreen();
-        ImageView loginBtn = findViewById(R.id.btn_login);
-        ImageView registerBtn = findViewById(R.id.btn_register);
 
-        loginBtn.setOnClickListener(v -> goToLoginActivity());
-        registerBtn.setOnClickListener(v -> goToRegisterActivity());
+        imageView.setOnClickListener(v -> goToRankingActivity());
     }
 
-    private void goToRegisterActivity() {
-        Intent startIntent = new Intent(getApplicationContext(), RegisterActivity.class);
+    private void goToRankingActivity() {
+        Intent startIntent = new Intent(getApplicationContext(),RankingActivity.class);
         startActivity(startIntent);
     }
 
@@ -38,10 +34,5 @@ public class MainActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         | View.SYSTEM_UI_FLAG_FULLSCREEN
         );
-    }
-
-    private void goToLoginActivity() {
-        Intent startIntent = new Intent(getApplicationContext(), LoginActivity.class);
-        startActivity(startIntent);
     }
 }

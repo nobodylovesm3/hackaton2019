@@ -2,6 +2,7 @@ package com.nmg.ecoraid.adapters;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -64,29 +65,30 @@ public class RaidsAdapter extends RecyclerView.Adapter<RaidsAdapter.CitiesViewHo
             viewHolder.btnLikeUnlike.setText("Attend");
         }
 
-        viewHolder.btnLikeUnlike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        viewHolder.imgCity.setOnClickListener(v ->{
 
-                if (viewHolder.btnLikeUnlike.getText().equals("Unattend")) {
-                    viewHolder.btnLikeUnlike.setText("Attend");
-                    viewHolder.txtCurrentPeople.setText("0");
-                    raid.setAttended(false);
-                    Database.removeLikedCity(raid);
-                    AttendingRaidsFragment.refreshAdapter();
-                    AttendingRaidsFragment.cityViewModel.delete(raid);
-                } else {
-                    viewHolder.btnLikeUnlike.setText("Unattend");
-                    viewHolder.txtCurrentPeople.setText("1");
-                    raid.setAttended(true);
-                    Database.addLikedCity(raid);
+        } );
+        viewHolder.btnLikeUnlike.setOnClickListener(view -> {
 
-                    AttendingRaidsFragment.refreshAdapter();
-                    AttendingRaidsFragment.cityViewModel.insert(raid);
-                }
+            if (viewHolder.btnLikeUnlike.getText().equals("Unattend")) {
+                viewHolder.btnLikeUnlike.setText("Attend");
+                viewHolder.txtCurrentPeople.setText("0");
+                raid.setAttended(false);
+                Database.removeLikedCity(raid);
+                AttendingRaidsFragment.refreshAdapter();
+                AttendingRaidsFragment.cityViewModel.delete(raid);
+            } else {
+                viewHolder.btnLikeUnlike.setText("Unattend");
+                viewHolder.txtCurrentPeople.setText("1");
+                raid.setAttended(true);
+                Database.addLikedCity(raid);
+
+                AttendingRaidsFragment.refreshAdapter();
+                AttendingRaidsFragment.cityViewModel.insert(raid);
             }
         });
     }
+
 
 
     @Override
